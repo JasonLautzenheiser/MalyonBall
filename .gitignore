@@ -243,3 +243,7 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+*.DS_Store
+/lib/Nez/Runtime/*.DS_Store
+*.DS_Store
+/images
