@@ -247,3 +247,4 @@ ModelManifest.xml
 /lib/Nez/Runtime/*.DS_Store
 *.DS_Store
 /images
+*.ltr
