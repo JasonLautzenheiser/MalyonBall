@@ -20,11 +20,8 @@ namespace MalyonBall
 
 
       // load starting level
+      GameCore.LevelManager.LoadLevel();
 
-      for (int i = 0; i < 5; i++)
-      {
-        GameCore.Instance.EntityManager.AddEntity(new Block(new Vector2(64 * i + 50, 100)));
-      }
 
     }
 

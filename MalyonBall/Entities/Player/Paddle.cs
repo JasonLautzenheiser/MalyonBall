@@ -44,7 +44,9 @@ namespace MalyonBall.Entities.Player
 
     public override void Draw(SpriteBatch batch)
     {
-      batch.DrawRectangle(CollisionBounds, Color.Red);
+      if (GameState.dbgShowCollisionBounds)
+        batch.DrawRectangle(CollisionBounds, Color.Red);
+
       batch.Draw(sprite);
     }
   }

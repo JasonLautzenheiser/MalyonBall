@@ -16,6 +16,7 @@ namespace MalyonBall
     public static Viewport ViewPort => Instance.GraphicsDevice.Viewport;
     public static Vector2 ScreenSize => new Vector2(ViewPort.Width, ViewPort.Height);
     public static GameTime GameTime { get; private set; }
+    public static LevelManager LevelManager { get; private set; }
     public static ParticleManager<ParticleState> ParticleManager { get; private set; }
     private readonly GraphicsDeviceManager graphicsDeviceManager;
     public readonly EntityManager EntityManager;
@@ -29,6 +30,7 @@ namespace MalyonBall
       Instance = this;
       graphicsDeviceManager = new GraphicsDeviceManager(this);
       EntityManager = new EntityManager();
+      LevelManager = new LevelManager();
       Content.RootDirectory = "Content";
       Window.AllowUserResizing = true;
       Window.Position = Point.Zero;

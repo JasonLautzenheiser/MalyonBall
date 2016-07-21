@@ -208,7 +208,9 @@ namespace MalyonBall.Entities.Player
 
     public override void Draw(SpriteBatch batch)
     {
-      batch.DrawRectangle(BoundingCircle.GetBoundingRectangle(), Color.Red);
+      if (GameState.dbgShowCollisionBounds)
+        batch.DrawRectangle(BoundingCircle.GetBoundingRectangle(), Color.Red);
+
       batch.Draw(sprite);
     }
   }
