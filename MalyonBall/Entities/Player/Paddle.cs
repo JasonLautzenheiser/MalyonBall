@@ -35,7 +35,6 @@ namespace MalyonBall.Entities.Player
 
     public override void Update(GameTime gameTime)
     {
-      var moveDir = Vector2.Zero;
       var width = sprite.TextureRegion.Width;
 
       MouseState mouseState = Mouse.GetState();

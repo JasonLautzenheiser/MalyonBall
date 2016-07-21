@@ -32,7 +32,7 @@ namespace MalyonBall.Entities.Effects
     {
       if (Ball.Velocity.LengthSquared() > 0.1f)
       {
-        float rotation = Ball.Direction.ToAngle();
+        float rotation = Ball.Velocity.ToAngle();
         Quaternion rot = Quaternion.CreateFromYawPitchRoll(0f, 0f, rotation);
 
         double t = GameCore.GameTime.TotalGameTime.TotalSeconds;

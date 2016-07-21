@@ -46,6 +46,8 @@ namespace MalyonBall
       // update the gamepad state
       previousGamePadState = currentGamePadState;
       currentGamePadState = GamePad.GetState(PlayerIndex.One);
+
+      
     }
 
     #endregion
@@ -57,7 +59,9 @@ namespace MalyonBall
       MoveLeft,
       MoveRight,
       ExitGame,
-      TotalActionCount
+      LaunchBall,
+      TotalActionCount,
+      
     }
 
 
@@ -65,7 +69,8 @@ namespace MalyonBall
     {
       "Move Left",
       "Move Right",
-      "Exit Game"
+      "Exit Game",
+      "Launch Ball"
     };
 
     public static string GetActionName(Action action)
@@ -517,10 +522,12 @@ namespace MalyonBall
     {
       actionMaps = new ActionMap[(int)Action.TotalActionCount];
 
-
       actionMaps[(int)Action.ExitGame] = new ActionMap();
       actionMaps[(int)Action.ExitGame].keyboardKeys.Add(Keys.Escape);
       actionMaps[(int)Action.ExitGame].gamePadButtons.Add(GamePadButtons.Back);
+
+      actionMaps[(int)Action.LaunchBall] = new ActionMap();
+      actionMaps[(int)Action.LaunchBall].keyboardKeys.Add(Keys.Space);
 
       actionMaps[(int)Action.MoveLeft] = new ActionMap();
       actionMaps[(int)Action.MoveLeft].keyboardKeys.Add(Keys.Left);
