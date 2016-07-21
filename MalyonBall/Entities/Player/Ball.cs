@@ -25,8 +25,8 @@ namespace MalyonBall.Entities.Player
     private BallTrailer trailer;
     private BallMovementState movementState = BallMovementState.Captured;
 
-    private const float speedYIncrease = 1.25f;
-    private const float speedXIncrease = 1.25f;
+    private const float SPEED_Y_INCREASE = 1.25f;
+    private const float SPEED_X_INCREASE = 1.25f;
 
 
     public float Speed = 400f;
@@ -41,7 +41,7 @@ namespace MalyonBall.Entities.Player
       }
     }
     public CircleF BoundingCircle;
-    public Paddle paddle;
+    private Paddle  paddle;
     private FastRandom r;
 
 
@@ -141,6 +141,7 @@ namespace MalyonBall.Entities.Player
         {
           Velocity = new Vector2(Velocity.X, -Velocity.Y);
           EffectsManager.AddAndTrigger<BlockDestruction>(Position);
+          SoundManager.PlaySound(Sound.PaddleBounce);
           block.Destroy();
           break;
         }
@@ -164,14 +165,17 @@ namespace MalyonBall.Entities.Player
       if (Math.Abs(BoundingCircle.GetBoundingRectangle().X) < Radius)
       {
         Velocity = new Vector2(-Velocity.X,Velocity.Y);
+        SoundManager.PlaySound(Sound.PaddleBounce);
       }
       else if (Math.Abs(BoundingCircle.GetBoundingRectangle().X - GameCore.ViewPort.Width) < Radius)
       {
         Velocity = new Vector2(-Velocity.X, Velocity.Y);
+        SoundManager.PlaySound(Sound.PaddleBounce);
       }
       else if (Math.Abs(BoundingCircle.GetBoundingRectangle().Y) < Radius)
       {
-        Velocity = new Vector2(Velocity.X, -Velocity.Y);
+        Velocity = new Vector2(Velocity.X, -Velocity.Y+1);
+        SoundManager.PlaySound(Sound.PaddleBounce);
       }
     }
 
@@ -201,8 +205,9 @@ namespace MalyonBall.Entities.Player
           Vector3 crossResult = Vector3.Cross(new Vector3(Velocity, 0), -Vector3.UnitY);
           Velocity = (crossResult.Z < 0 ? new Vector2(0.423f, -0.906f) : new Vector2(-0.423f, -0.906f)) * speed;
         }
-        Velocity =  new Vector2(MathHelper.Clamp(Velocity.X + (Position.X - paddle.Position.X) * speedXIncrease,-700, 700), MathHelper.Clamp(-Math.Abs(Velocity.Y) * speedYIncrease,-700, 700));
-        
+        Velocity =  new Vector2(MathHelper.Clamp(Velocity.X + (Position.X - paddle.Position.X) * SPEED_X_INCREASE,-700, 700), MathHelper.Clamp(-Math.Abs(Velocity.Y) * SPEED_Y_INCREASE,-700, 700));
+        SoundManager.PlaySound(Sound.PaddleBounce);
+
       }
     }
 

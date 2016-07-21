@@ -1,5 +1,4 @@
-﻿using MalyonBall.Entities.Effects;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using MonoGame.Extended.Shapes;
@@ -8,39 +7,44 @@ using MonoGame.Extended.TextureAtlases;
 
 namespace MalyonBall.Entities.Blocks
 {
-  public class Block : Entity
+  public enum BlockType
   {
-    private Sprite sprite;
-    public int Width => sprite.TextureRegion.Width;
-    public int Height => sprite.TextureRegion.Height;
-    public RectangleF CollisionBounds;
-    public Vector2 Position
+    None, 
+    Green, 
+    Red
+  }
+
+  public abstract class Block : Entity
+  {
+    protected Block()
     {
-      get { return sprite.Position; }
-      set
-      {
-        sprite.Position = value;
-        CollisionBounds.Location = value;
-        CollisionBounds.Size = new SizeF(Width, Height);
-      }
+      Sprite = new Sprite(Art.Block);
     }
 
-
-    public Block(Vector2 position)
+    protected Block(Vector2 position)
     {
-      sprite = new Sprite(Art.Block);
+      Sprite = new Sprite(Art.Block);
       Position = position;
 
     }
 
-
-    public override void Update(GameTime gameTime)
+    public RectangleF CollisionBounds;
+    public Vector2 Position
     {
+      get { return Sprite.Position; }
+      set
+      {
+        Sprite.Position = value;
+        CollisionBounds.Location = value;
+        CollisionBounds.Size = new SizeF(Width, Height);
+      }
     }
+    protected readonly Sprite Sprite;
+    public int Width => Sprite.TextureRegion.Width;
+    public int Height => Sprite.TextureRegion.Height;
 
     public override void Draw(SpriteBatch batch)
     {
-      batch.Draw(sprite.TextureRegion, sprite.Position, Color.Green);
       if (GameState.dbgShowCollisionBounds)
         batch.DrawRectangle(CollisionBounds.GetBoundingRectangle(), Color.LimeGreen);
     }

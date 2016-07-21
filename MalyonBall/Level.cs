@@ -17,10 +17,22 @@ namespace MalyonBall
 
       brickMap = new[,]
       {
-        {1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1},
-        {1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1},
-        {1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1},
+        {1, 0, 1, 0, 1, 1, 1, 0, 2, 0, 0, 0, 2, 0, 0, 0, 1, 0, 1, 0},
+        {1, 0, 1, 0, 1, 0, 1, 0, 2, 0, 0, 0, 2, 0, 0, 0, 1, 0, 1, 0},
+        {1, 1, 1, 0, 1, 0, 1, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 1, 0, 0},
+        {1, 0, 1, 0, 1, 0, 1, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 1, 0, 0},
+        {1, 0, 1, 0, 1, 1, 1, 0, 2, 2, 2, 0, 2, 2, 2, 0, 0, 1, 0, 0},
       };
+
+//      brickMap = new[,]
+//      {
+//        {1, 1, 1, 0, 1, 1, 1, 0, 2, 0, 2, 0, 1, 1, 1, 0, 1, 0, 0, 1},
+//        {1, 0, 0, 0, 0, 1, 0, 0, 2, 0, 2, 0, 1, 0, 1, 0, 1, 1, 0, 1},
+//        {1, 1, 0, 0, 0, 1, 0, 0, 2, 2, 2, 0, 1, 1, 1, 0, 1, 0, 1, 1},
+//        {1, 0, 0, 0, 0, 1, 0, 0, 2, 0, 2, 0, 1, 0, 1, 0, 1, 0, 0, 1},
+//        {1, 1, 1, 0, 0, 1, 0, 0, 2, 0, 2, 0, 1, 0, 1, 0, 1, 0, 0, 1},
+//      };
+
     }
 
     public void Load()
@@ -29,8 +41,13 @@ namespace MalyonBall
       {
         for (int col = 0; col < brickMap.GetLength(1); col++)
         {
-          if (brickMap[row,col]== 1)
-            GameCore.Instance.EntityManager.AddEntity(new Block(new Vector2(64 * col + 50, 100 + row * 20)));
+          var brick = brickMap[row,col];
+          if (brick != 0)
+          {
+            Block block = BlockFactory.CreateBlock((BlockType)brick);
+            block.Position = new Vector2(64*col + 50, 100 + row*20);
+            GameCore.Instance.EntityManager.AddEntity(block);
+          }
         }
       }
 

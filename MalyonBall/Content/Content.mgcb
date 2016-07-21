@@ -132,3 +132,9 @@
 /processorParam:TextureFormat=Color
 /build:textures/textparticle.png
 
+#begin sounds/paddlebounce.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/paddlebounce.wav
+

@@ -34,7 +34,7 @@ namespace MalyonBall
       Content.RootDirectory = "Content";
       Window.AllowUserResizing = true;
       Window.Position = Point.Zero;
-      IsMouseVisible = true;
+      IsMouseVisible = false;
 
       graphicsDeviceManager.PreferredBackBufferWidth = 1422;
       graphicsDeviceManager.PreferredBackBufferHeight = 900;
@@ -54,6 +54,7 @@ namespace MalyonBall
     {
       Font.Load(Content);
       Art.Load(Content);
+      Sounds.Load(Content);
 
       gameScreen = new GameScreen()
       {
